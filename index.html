@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="" />
-    <title>Document</title>
+    <meta name="description" content="Cool Pinky artistisivu" />
+    <title>Cool Pinky | Artisti</title>
     <link
       rel="preload"
       as="image"
@@ -42,8 +42,6 @@
         --bg-inverse: seashell;
         --bg-inverse-hover: rgb(209, 216, 224);
         --color-inverse: rgba(23, 23, 23, 0.9);
-        --font-sans:
-          system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         --header-height: 50px;
         --radius: 1rem;
         --section-padding: 1rem;
@@ -54,6 +52,12 @@
           rgba(185, 213, 255, 0.05),
           rgba(185, 213, 255, 0.02)
         );
+        --font-body:
+          "Lucida Grande", "DejaVu Sans", "Segoe UI", Verdana, system-ui,
+          -apple-system, sans-serif;
+        /* --font-heading: Tahoma, system-ui, -apple-system, sans-serif; */
+        --font-heading:
+          Georgia, Palatino, "Palatino Linotype", "DejaVu Serif", serif;
       }
 
       /* @media (prefers-color-scheme: light) {
@@ -72,7 +76,7 @@
       }
 
       body {
-        font-family: var(--font-sans);
+        font-family: var(--font-body);
         background-color: var(--bg);
         color: var(--color);
         line-height: 1.6;
@@ -117,6 +121,8 @@
         line-height: 1.2;
         color: var(--color);
         padding-bottom: 0.75em;
+        font-family: var(--font-heading);
+        letter-spacing: 0.02em;
       }
 
       p {
