@@ -188,8 +188,10 @@
 /* Container to control layout and width */
 .audio-slider-container {
   width: 100%;
-  max-width: 400px;
+  max-width: 600px;
   padding: 10px;
+  display: flex;
+  align-items: center;
 }
 
 /* Reset default browser styles for the range slider */
@@ -246,15 +248,19 @@
 }
 
 #play-pause-btn {
+  padding: 0.25rem;
+  padding-bottom: 0.3rem;
   background-color: transparent;
+  min-width: calc(20px + 0.5rem);
 }
 
 #play-pause-btn img {
-  width: 1.5rem;
+  width: 20px;
 }
 
 .song-details {
-  font-size: 14px;
+  font-size: 13px;
+  min-width: 100px;
 }
 
 .song-details p:first-child {

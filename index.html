@@ -63,8 +63,13 @@
         line-height: 1.6;
         min-height: 100svh;
         letter-spacing: 0.04em;
-        font-weight: lighter;
+        font-weight: normal;
+        font-optical-sizing: auto;
         text-shadow: 2px 3px 5px rgba(0, 0, 0, 0.35);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+        -webkit-text-size-adjust: 100%;
       }
 
       section {
@@ -218,7 +223,7 @@
         margin: 0 auto;
         display: flex;
         justify-content: space-between;
-        padding: 1rem 1.5rem;
+        padding: 0.5rem 0.75rem;
         border-radius: var(--radius);
         z-index: 1000;
         backdrop-filter: blur(100px);
@@ -239,6 +244,10 @@
 
         .player-container {
           padding: 1.5rem;
+        }
+
+        .player {
+          padding: 1rem 1.5rem;
         }
       }
 
@@ -353,7 +362,7 @@
           </div>
 
           <button id="play-pause-btn">
-            <img src="svg/play.svg" alt="play pause button image" />
+            <img src="svg/pause.svg" alt="play pause button image" />
           </button>
         </div>
       </div>
