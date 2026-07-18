@@ -24,7 +24,8 @@
         --color: rgba(255, 255, 255, 0.9);
         --color-subtle: rgba(255, 255, 255, 0.75);
         --primary: rgb(41, 104, 214);
-        --bg-inverse: rgb(237, 239, 242);
+        --pink: #dc6f95;
+        --bg-inverse: seashell;
         --bg-inverse-hover: rgb(209, 216, 224);
         --color-inverse: rgba(23, 23, 23, 0.9);
         --font-sans:
@@ -201,8 +202,8 @@
         position: sticky;
         bottom: 0;
         padding: 0.5rem;
-        opacity: 0;
         transform: scale(0.5);
+        opacity: 0;
 
         transition:
           transform 150ms ease-in-out,
@@ -219,6 +220,7 @@
           rgba(31, 31, 31, 0.5),
           rgba(17, 17, 17, 0.5)
         );
+        background: var(--bg);
         max-width: 1000px;
         margin: 0 auto;
         display: flex;
@@ -226,7 +228,6 @@
         padding: 0.5rem 0.75rem;
         border-radius: var(--radius);
         z-index: 1000;
-        backdrop-filter: blur(100px);
         /* corner-shape: superellipse(1.5); */
         border: 0.5px solid var(--color-border-subtle);
         position: relative;
@@ -238,8 +239,8 @@
 
       @media (min-width: 768px) {
         h1 {
-          font-size: 3rem;
-          text-shadow: 2px 3px 7px rgba(0, 0, 0, 0.3);
+          font-size: 3.5rem;
+          text-shadow: 2px 3px 10px rgba(0, 0, 0, 0.3);
         }
 
         .player-container {
@@ -271,7 +272,7 @@
         </nav>
       </div>
     </header>
-    <main>
+    <main x-data="songPlayer()" x-init="init($refs.audio)">
       <section class="hero">
         <div class="hero-upper">
           <h1>Cool Pinky • Artisti</h1>
@@ -312,31 +313,56 @@
       </section>
       <section class="songs">
         <div class="song-selection">
-          <div class="album-cover-img-container">
-            <img src="img/coolpinky.jpeg" alt="album 1 cover" />
+          <div class="cover-container">
+            <div class="cover-img-container">
+              <img
+                :src="currentSong.cover"
+                :alt="currentSong.name + ' cover'"
+              />
+            </div>
+            <div class="song-info">
+              <p
+                class="song-name-below"
+                x-transition
+                x-text="currentSong.name"
+              ></p>
+            </div>
           </div>
-          <div class="album-vertical">
-            <h3>Album name</h3>
-            <div class="albumlist">
+
+          <div class="songs-vertical">
+            <h3>Kappaleet</h3>
+            <div class="song-list">
               <ul>
-                <li class="album-item">
-                  moi
-                  <button>Track1</button>
-                </li>
-                <li class="album-item"><button>track2</button></li>
-                <li class="album-item"><button>track3</button></li>
+                <template x-for="song in songs" :key="song.id">
+                  <li class="song-item">
+                    <button
+                      class="song-btn"
+                      :class="{ 'is-active': song.id === currentSongId }"
+                      @click="playSong(song)"
+                    >
+                      <span x-text="song.name"></span>
+                      <img
+                        :src="
+                          isPlaying && song.id === currentSongId
+                            ? 'svg/pause.svg'
+                            : 'svg/play.svg'
+                        "
+                        alt=""
+                      />
+                    </button>
+                  </li>
+                </template>
               </ul>
             </div>
           </div>
         </div>
-        <button class="custom-audio-btn" onclick="toggleAudio()">
-          Play Sound
-        </button>
 
-        <audio id="audio1">
-          <source src="audio/Vastalause.CoolPinkyMSTR.wav" type="audio/wav" />
-          Your browser does not support the audio element.
-        </audio>
+        <audio
+          x-ref="audio"
+          @play="isPlaying = true"
+          @pause="isPlaying = false"
+          @ended="isPlaying = false"
+        ></audio>
         <div class="songs-lower"></div>
       </section>
       <section>
@@ -345,11 +371,10 @@
       <section>
         <div class="container"></div>
       </section>
-      <div class="player-container">
+      <div class="player-container" :class="{ active: isPlaying }">
         <div class="player">
           <div class="song-details">
-            <p>song name</p>
-            <p>album</p>
+            <p x-text="currentSong.name"></p>
           </div>
           <div class="audio-slider-container">
             <input
@@ -361,8 +386,11 @@
             />
           </div>
 
-          <button id="play-pause-btn">
-            <img src="svg/pause.svg" alt="play pause button image" />
+          <button id="play-pause-btn" @click="togglePlay()">
+            <img
+              :src="isPlaying ? 'svg/pause.svg' : 'svg/play.svg'"
+              alt="play pause button image"
+            />
           </button>
         </div>
       </div>
@@ -370,22 +398,77 @@
     <footer>&copy; Cool Pinky</footer>
 
     <script>
-      document.addEventListener("alpine:init", () => {
-        console.log("AlpineJS initialized");
-      });
-    </script>
+      function songPlayer() {
+        return {
+          songs: [
+            {
+              id: "vastalause",
+              name: "Vastalause",
+              audio: "audio/vastalause.wav",
+              cover: "img/vastalause.webp",
+              video: null,
+            },
+            {
+              id: "roihuvuori",
+              name: "Roihuvuori",
+              audio: "audio/roihuvuori.wav",
+              cover: "img/roihuvuori.webp",
+              video: null,
+            },
+            {
+              id: "aurinko",
+              name: "Aurinko",
+              audio: "audio/aurinko.wav",
+              cover: "img/aurinko.webp",
+              video: null,
+            },
+            {
+              id: "toinenpuoli",
+              name: "Toinen puoli",
+              audio: "audio/toinenpuoli.wav",
+              cover: "img/toinenpuoli.webp",
+              video: null,
+            },
+            {
+              id: "vettenpaal",
+              name: "Vetten pääl",
+              audio: "audio/vettenpaal.wav",
+              cover: "img/vettenpaal.webp",
+              video: null,
+            },
+          ],
+          currentSongId: null,
+          isPlaying: false,
 
-    <script>
-      const audio = document.getElementById("audio1");
-      const playerContainer = document.querySelector(".player-container");
+          get currentSong() {
+            return (
+              this.songs.find((s) => s.id === this.currentSongId) ??
+              this.songs[0]
+            );
+          },
 
-      function toggleAudio() {
-        playerContainer.classList.toggle("active");
-        if (audio.paused) {
-          audio.play();
-        } else {
-          audio.pause();
-        }
+          init(audioEl) {
+            this.audioEl = audioEl;
+          },
+
+          playSong(song) {
+            if (this.currentSongId === song.id) {
+              this.togglePlay();
+              return;
+            }
+            this.currentSongId = song.id;
+            this.audioEl.src = song.audio;
+            this.audioEl.play();
+          },
+
+          togglePlay() {
+            if (this.audioEl.paused) {
+              this.audioEl.play();
+            } else {
+              this.audioEl.pause();
+            }
+          },
+        };
       }
     </script>
   </body>

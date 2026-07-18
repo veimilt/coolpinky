@@ -98,6 +98,7 @@
 
 .songs {
   position: relative;
+  padding: 5rem 0;
 }
 
 .songs::before {
@@ -107,13 +108,12 @@
   z-index: 0;
   pointer-events: none;
 
-  background-image:
-    radial-gradient(circle, rgba(147, 193, 219, 0.125) 10%, transparent 11%),
-    radial-gradient(circle, rgba(147, 193, 219, 0.125) 10%, transparent 11%);
+  background-image: radial-gradient(
+    circle 1.5px,
+    rgba(147, 193, 219, 0.33) 100%,
+    transparent 100%
+  );
   background-size: 1rem 1rem;
-  background-position:
-    0 0,
-    1rem 1rem;
   background-attachment: fixed;
 
   mask-image: linear-gradient(
@@ -134,46 +134,78 @@
 
 .song-selection {
   width: 100%;
-  max-width: 1000px;
+  max-width: 1111px;
   margin: 0 auto;
   /* background: linear-gradient(transparent, rgba(185, 94, 109, 0.5)); */
-  border-radius: var(--radius);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  border: 0.5px solid var(--color-border);
-  padding: 0.5rem;
   position: relative;
-  min-height: 600px;
-  background: linear-gradient(#111, rgb(115, 64, 58));
+  gap: 2rem;
 }
 
-.album-cover-img-container {
-  max-width: 500px;
-}
-
-.album-cover-img-container img {
-  border-radius: calc(var(--radius) - 0.5rem);
-}
-.album-vertical {
+.cover-container {
+  /* background-color: var(--bg-inverse); */
+  background: linear-gradient(#cfbcb7, var(--bg-inverse));
   width: 100%;
+}
+.cover-img-container {
+  /* background-color: #cfbcb7; */
+}
+
+.cover-img-container img {
+  width: 75%;
+  box-shadow: 3px 5px 23px -9px rgba(0, 0, 0, 0.5);
+  border-radius: var(--radius);
+}
+
+.songs-vertical {
+  width: 100%;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   padding: 2rem;
+  background: linear-gradient(#111, rgb(184, 93, 125));
+  border-radius: var(--radius);
+  border: 0.5px solid var(--color-border);
 }
 
-.albumlist ul {
+.song-list ul {
   display: flex;
   flex-direction: column;
 }
 
-.album-item {
-  border-bottom: 1px solid var(--color-border);
+.song-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem;
   font-weight: normal;
+}
+
+.song-btn {
+  background-color: transparent;
+  width: 100%;
+  color: var(--text);
+  border-radius: 10px;
+  background: linear-gradient(transparent, rgba(255, 181, 207, 0.2));
+  justify-content: space-between;
+  border: 0.5px solid var(--color-border);
+}
+
+.song-btn:hover {
+  background: linear-gradient(
+    rgba(255, 181, 207, 0.1),
+    rgba(255, 181, 207, 0.3)
+  );
+}
+
+.song-btn img {
+  opacity: 0;
+  width: 20px;
+}
+
+.song-btn:hover img {
+  opacity: 1;
 }
 /* .songs-lower {
   background-position: bottom;
@@ -184,6 +216,15 @@
   top: 50%;
   background-repeat: no-repeat;
 } */
+
+.song-name-below {
+  color: black;
+  text-shadow: none;
+  font-size: 1.5rem;
+  padding: 2rem;
+  padding-bottom: 1.5rem;
+  text-align: right;
+}
 
 /* Container to control layout and width */
 .audio-slider-container {
@@ -217,7 +258,7 @@
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: var(--primary);
+  background: var(--pink);
   transition:
     transform 0.1s ease,
     background-color 0.1s ease;
@@ -226,7 +267,7 @@
 /* Make thumb grow slightly on hover for better user feedback */
 .modern-slider:hover::-webkit-slider-thumb {
   transform: scale(1.2);
-  background: var(--primary);
+  background: var(--pink);
 }
 
 /* Firefox Thumb Styles */
@@ -235,7 +276,7 @@
   height: 14px;
   border: none;
   border-radius: 50%;
-  background: var(--primary);
+  background: var(--pink);
   transition:
     transform 0.1s ease,
     background-color 0.1s ease;
@@ -244,7 +285,7 @@
 
 .modern-slider:hover::-moz-range-thumb {
   transform: scale(1.2);
-  background: var(--primary);
+  background: var(--pink);
 }
 
 #play-pause-btn {
@@ -261,6 +302,9 @@
 .song-details {
   font-size: 13px;
   min-width: 100px;
+  display: flex;
+  align-items: center;
+  padding-bottom: 3px;
 }
 
 .song-details p:first-child {
@@ -294,9 +338,25 @@ footer {
     padding: 3rem 4rem;
     padding-bottom: 3.5rem;
   }
-
+  .songs {
+    padding: 8rem 0;
+  }
   .song-selection {
     flex-direction: row;
+    align-items: center;
+  }
+
+  .songs-vertical {
+    width: 44%;
+    margin-bottom: 5rem;
+  }
+
+  .cover-container {
+    width: 67%;
+  }
+
+  .cover-img-container img {
+    width: 80%;
   }
 
   footer {
@@ -308,5 +368,9 @@ footer {
 @media (min-width: 1024px) {
   .hero-images-grid {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .cover-img-container img {
+    transform: translate(-1rem, 2rem);
   }
 }
