@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="styles.css
+    "
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg: #111;
+        --color: rgba(255, 255, 255, 0.9);
+        --color-subtle: rgba(255, 255, 255, 0.75);
+        --primary: rgb(41, 104, 214);
+        --bg-inverse: rgb(237, 239, 242);
+        --bg-inverse-hover: rgb(209, 216, 224);
+        --color-inverse: rgba(23, 23, 23, 0.9);
+        --font-sans:
+          system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        --header-height: 50px;
+        --radius: 1rem;
+        --section-padding: 1rem;
+        --container-width: 1280px;
+        --color-border: rgba(237, 239, 242, 0.25);
+        --color-border-subtle: rgba(237, 239, 242, 0.15);
+        --bg-card: linear-gradient(
+          rgba(185, 213, 255, 0.05),
+          rgba(185, 213, 255, 0.02)
+        );
+      }
+
+      /* @media (prefers-color-scheme: light) {
+        :root {
+          --bg: rgb(237, 239, 242);
+          --color: rgba(23, 23, 23, 0.9);
+          --color-subtle: rgba(24, 24, 24, 0.75);
+          --bg-inverse: #111;
+          --color-inverse: rgba(255, 255, 255, 0.9);
+        }
+      } */
+
+      html {
+        color-scheme: dark light;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: var(--font-sans);
+        background-color: var(--bg);
+        color: var(--color);
+        line-height: 1.6;
+        min-height: 100svh;
+        letter-spacing: 0.04em;
+        font-weight: lighter;
+        text-shadow: 2px 3px 5px rgba(0, 0, 0, 0.35);
+      }
+
+      section {
+        width: 100%;
+        padding: var(--section-padding);
+      }
+
+      img,
+      video,
+      svg {
+        display: block;
+        max-width: 100%;
+        height: auto;
+      }
+
+      p,
+      h1,
+      h2,
+      h3,
+      h4 {
+        overflow-wrap: break-word;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        text-wrap: balance;
+        letter-spacing: normal;
+        line-height: 1.2;
+        color: var(--color);
+        padding-bottom: 0.75em;
+      }
+
+      p {
+        color: var(--color-subtle);
+        text-wrap: pretty;
+        max-width: 1000px;
+      }
+
+      a {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: initial;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      ul,
+      ol {
+        list-style: none;
+      }
+
+      button {
+        all: unset;
+        cursor: pointer;
+        font: inherit;
+        font-weight: initial;
+        font-size: initial;
+        background-color: #dc6f95;
+        background-color: var(--bg-inverse);
+        padding: 0.5rem 1rem;
+        color: black;
+        border-radius: 8px;
+        transition: background-color 0.1s ease;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 100px;
+        padding-bottom: 0;
+        padding: 0.5rem 1rem;
+        padding-bottom: 0.6rem;
+        text-shadow: none;
+      }
+
+      button:hover {
+        background-color: #cf678b;
+        background-color: var(--bg-inverse-hover);
+      }
+
+      input,
+      textarea,
+      select {
+        font: inherit;
+      }
+
+      .container {
+        width: 100%;
+        max-width: var(--container-width);
+        margin: 0 auto;
+      }
+
+      header {
+        width: 100%;
+        height: var(--header-height);
+        position: fixed;
+        top: 0;
+        z-index: 1000;
+        background-color: var(--bg);
+      }
+
+      .header-content {
+        height: 100%;
+        width: 100%;
+        max-width: 1280px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      header ul {
+        display: flex;
+        gap: 1rem;
+      }
+
+      header a {
+        height: 100%;
+        padding: 0.5rem 1rem;
+      }
+
+      audio {
+        display: none;
+      }
+
+      .player-container {
+        position: sticky;
+        bottom: 0;
+        padding: 0.5rem;
+        opacity: 0;
+        transform: scale(0.5);
+
+        transition:
+          transform 150ms ease-in-out,
+          opacity 150ms ease-in-out;
+      }
+
+      .player-container.active {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .player {
+        background: linear-gradient(
+          rgba(31, 31, 31, 0.5),
+          rgba(17, 17, 17, 0.5)
+        );
+        max-width: 1000px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem 1.5rem;
+        border-radius: var(--radius);
+        z-index: 1000;
+        backdrop-filter: blur(100px);
+        /* corner-shape: superellipse(1.5); */
+        border: 0.5px solid var(--color-border-subtle);
+        position: relative;
+        z-index: 1000;
+      }
+
+      @media (min-width: 640px) {
+      }
+
+      @media (min-width: 768px) {
+        h1 {
+          font-size: 3rem;
+          text-shadow: 2px 3px 7px rgba(0, 0, 0, 0.3);
+        }
+
+        .player-container {
+          padding: 1.5rem;
+        }
+      }
+
+      @media (min-width: 1024px) {
+      }
+
+      @media (min-width: 1280px) {
+      }
+    </style>
+    <script src="//unpkg.com/alpinejs" defer></script>
+  </head>
+  <body>
+    <header>
+      <div class="header-content">
+        <nav>
+          <ul>
+            <li><a href="#">Link1</a></li>
+            <li><a href="#">Link2</a></li>
+            <li><a href="#">Link3</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <section class="hero">
+        <div class="hero-upper">
+          <h1>Cool Pinky • Artisti</h1>
+        </div>
+        <div class="hero-images-grid">
+          <div class="hero-img-card-container">
+            <img
+              src="img/coolpinky_vesitorni.avif"
+              alt="coolpinkyn selfie vesitornin edessä"
+            />
+          </div>
+          <div class="hero-img-card-container">
+            <img
+              src="img/coolpinky_ulkona.avif"
+              alt="coolpinky yhteiskuvassa"
+            />
+          </div>
+          <div class="hero-img-card-container">
+            <img
+              src="img/pinky_poydalla.avif"
+              alt="coolpinky laulamassa pöydän päällä"
+            />
+          </div>
+        </div>
+        <div class="hero-below">
+          <p class="hero-below-pill">About me</p>
+          <div class="hero-below-card">
+            Cool Pinky on Helsinkiläinen laulaja-lauluntekijä joka lokeroi
+            itsensä 2026 työläisnaisenindiemusiikiksi. Cool Pinky säveltää,
+            sanoittaa, sovittaa sekä äänittää ja tuottaa omat kappaleensa.
+          </div>
+        </div>
+      </section>
+      <section class="big-img">
+        <div class="container">
+          <img src="img/coolpinky.jpeg" alt="Image" />
+        </div>
+      </section>
+      <section class="songs">
+        <div class="song-selection">
+          <div class="album-cover-img-container">
+            <img src="img/coolpinky.jpeg" alt="album 1 cover" />
+          </div>
+          <div class="album-vertical">
+            <h3>Album name</h3>
+            <div class="albumlist">
+              <ul>
+                <li class="album-item">
+                  moi
+                  <button>Track1</button>
+                </li>
+                <li class="album-item"><button>track2</button></li>
+                <li class="album-item"><button>track3</button></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <button class="custom-audio-btn" onclick="toggleAudio()">
+          Play Sound
+        </button>
+
+        <audio id="audio1">
+          <source src="audio/Vastalause.CoolPinkyMSTR.wav" type="audio/wav" />
+          Your browser does not support the audio element.
+        </audio>
+        <div class="songs-lower"></div>
+      </section>
+      <section>
+        <div class="container"></div>
+      </section>
+      <section>
+        <div class="container"></div>
+      </section>
+      <div class="player-container">
+        <div class="player">
+          <div class="song-details">
+            <p>song name</p>
+            <p>album</p>
+          </div>
+          <div class="audio-slider-container">
+            <input
+              type="range"
+              class="modern-slider"
+              min="0"
+              max="100"
+              value="30"
+            />
+          </div>
+
+          <button id="play-pause-btn">
+            <img src="svg/play.svg" alt="play pause button image" />
+          </button>
+        </div>
+      </div>
+    </main>
+    <footer>&copy; Cool Pinky</footer>
+
+    <script>
+      document.addEventListener("alpine:init", () => {
+        console.log("AlpineJS initialized");
+      });
+    </script>
+
+    <script>
+      const audio = document.getElementById("audio1");
+      const playerContainer = document.querySelector(".player-container");
+
+      function toggleAudio() {
+        playerContainer.classList.toggle("active");
+        if (audio.paused) {
+          audio.play();
+        } else {
+          audio.pause();
+        }
+      }
+    </script>
+  </body>
+</html>

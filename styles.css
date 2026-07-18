@@ -1,0 +1,306 @@
+.hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: var(--header-height);
+  background-image: url("svg/circle-medium.svg");
+  background-size: contain;
+}
+
+.hero-upper {
+  height: 35svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1.5rem;
+}
+
+.hero-below {
+  height: 75svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 7rem;
+}
+
+.hero-below-pill {
+  border: 0.5px solid var(--color-border);
+  font-weight: initial;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  padding-bottom: 0;
+  padding: 0.5rem 1rem;
+  padding-bottom: 0.6rem;
+  background-color: rgba(17, 17, 17, 0.5);
+}
+.hero-below-card {
+  background: rgba(38, 94, 114, 0.6);
+  background: var(--bg-card);
+  background: linear-gradient(rgba(25, 25, 25, 0.5), rgba(17, 17, 17, 0.5));
+  backdrop-filter: blur(4px);
+  display: flex;
+  border-radius: 24px;
+  max-width: 777px;
+  font-size: 1.5rem;
+  padding: 1.5rem 2rem;
+  border: 0.5px solid var(--color-border);
+  /* transform: rotateX(10deg); */
+}
+
+.hero-images-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+  max-width: 1333px;
+}
+
+.hero-img-card-container {
+  position: relative;
+  border-radius: 28px;
+  overflow: hidden;
+}
+
+.hero-img-card-container img {
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+}
+
+.hero-img-card-container::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(transparent, rgba(185, 94, 109, 0.5));
+  content: "";
+  z-index: 10;
+}
+
+.big-img {
+  min-height: 100svh;
+  position: relative;
+  background-image: url("svg/stakki.svg");
+  background-size: cover;
+  background-position: bottom;
+}
+
+.big-img img {
+  border-radius: 10px;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.songs {
+  position: relative;
+}
+
+.songs::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  background-image:
+    radial-gradient(circle, rgba(147, 193, 219, 0.125) 10%, transparent 11%),
+    radial-gradient(circle, rgba(147, 193, 219, 0.125) 10%, transparent 11%);
+  background-size: 1rem 1rem;
+  background-position:
+    0 0,
+    1rem 1rem;
+  background-attachment: fixed;
+
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.15) 15%,
+    rgba(0, 0, 0, 0.55) 50%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.15) 15%,
+    rgba(0, 0, 0, 0.55) 50%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+}
+
+.song-selection {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  /* background: linear-gradient(transparent, rgba(185, 94, 109, 0.5)); */
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 0.5px solid var(--color-border);
+  padding: 0.5rem;
+  position: relative;
+  min-height: 600px;
+  background: linear-gradient(#111, rgb(115, 64, 58));
+}
+
+.album-cover-img-container {
+  max-width: 500px;
+}
+
+.album-cover-img-container img {
+  border-radius: calc(var(--radius) - 0.5rem);
+}
+.album-vertical {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+.albumlist ul {
+  display: flex;
+  flex-direction: column;
+}
+
+.album-item {
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  font-weight: normal;
+}
+/* .songs-lower {
+  background-position: bottom;
+ 
+  position: absolute;
+  content: "";
+  inset: 0;
+  top: 50%;
+  background-repeat: no-repeat;
+} */
+
+/* Container to control layout and width */
+.audio-slider-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+}
+
+/* Reset default browser styles for the range slider */
+.modern-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 3px; /* Sleek, thin track */
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.15); /* Translucent track */
+  outline: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.modern-slider:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.modern-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--primary);
+  transition:
+    transform 0.1s ease,
+    background-color 0.1s ease;
+}
+
+/* Make thumb grow slightly on hover for better user feedback */
+.modern-slider:hover::-webkit-slider-thumb {
+  transform: scale(1.2);
+  background: var(--primary);
+}
+
+/* Firefox Thumb Styles */
+.modern-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border: none;
+  border-radius: 50%;
+  background: var(--primary);
+  transition:
+    transform 0.1s ease,
+    background-color 0.1s ease;
+  cursor: pointer;
+}
+
+.modern-slider:hover::-moz-range-thumb {
+  transform: scale(1.2);
+  background: var(--primary);
+}
+
+#play-pause-btn {
+  background-color: transparent;
+}
+
+#play-pause-btn img {
+  width: 1.5rem;
+}
+
+.song-details {
+  font-size: 14px;
+}
+
+.song-details p:first-child {
+  font-weight: bold;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .hero-images-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero {
+    background-repeat: no-repeat;
+    background-position: 200% center;
+  }
+
+  .hero-below {
+    padding-bottom: 10rem;
+  }
+
+  .hero-below-card {
+    font-size: 1.5rem;
+    padding: 3rem 4rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .song-selection {
+    flex-direction: row;
+  }
+
+  footer {
+    padding-top: 0;
+    padding-bottom: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-images-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
